@@ -14,22 +14,22 @@ def test():
     return 'Hello... World...'
 
 
-@app.route('/turnon')
+@app.route('/turnon', methods=['GET', 'POST'])
 def turnon():
     print('recieved')
     if requests.method == 'POST':
         print('led should turn on')
         GPIO.output(18, 1)
-    return
+    return 'penis'
 
 
-@app.route('/turnoff/')
+@app.route('/turnoff/', methods=['GET', 'POST'])
 def turnoff():
     print('recieved')
     if requests.method == 'POST':
         print('led should turn on')
         GPIO.output(18, 0)
-    return
+    return 'balls'
 
 
 @app.route('/blink/')
