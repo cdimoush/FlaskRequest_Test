@@ -10,18 +10,25 @@ app = Flask(__name__)
 
 @app.route('/')
 def test():
+    print('started on')
     return 'Hello... World...'
 
 
-@app.route('/turnon/')
+@app.route('/turnon')
 def turnon():
-    GPIO.output(18, 1)
+    print('recieved')
+    if requests.method == 'POST':
+        print('led should turn on')
+        GPIO.output(18, 1)
     return
 
 
 @app.route('/turnoff/')
 def turnoff():
-    GPIO.output(18, 0)
+    print('recieved')
+    if requests.method == 'POST':
+        print('led should turn on')
+        GPIO.output(18, 0)
     return
 
 
