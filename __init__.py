@@ -23,7 +23,7 @@ def turnon():
     return 'penis'
 
 
-@app.route('/turnoff/', methods=['GET', 'POST'])
+@app.route('/turnoff', methods=['GET', 'POST'])
 def turnoff():
     print('recieved')
     if request.method == 'POST':
