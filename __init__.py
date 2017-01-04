@@ -1,6 +1,6 @@
-from flask import Flask
+from flask import Flask, request
 import RPi.GPIO as GPIO
-import requests
+
 
 GPIO.setmode(GPIO.BCM)
 GPIO.setup(18, GPIO.OUT)
@@ -17,7 +17,7 @@ def test():
 @app.route('/turnon', methods=['GET', 'POST'])
 def turnon():
     print('recieved')
-    if requests.method == 'POST':
+    if request.method == 'POST':
         print('led should turn on')
         GPIO.output(18, 1)
     return 'penis'
@@ -26,7 +26,7 @@ def turnon():
 @app.route('/turnoff/', methods=['GET', 'POST'])
 def turnoff():
     print('recieved')
-    if requests.method == 'POST':
+    if request.method == 'POST':
         print('led should turn on')
         GPIO.output(18, 0)
     return 'balls'
