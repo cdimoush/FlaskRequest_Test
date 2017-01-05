@@ -1,5 +1,6 @@
 from flask import Flask, request
 import RPi.GPIO as GPIO
+import time
 
 
 GPIO.setmode(GPIO.BCM)
@@ -18,23 +19,32 @@ def test():
 def turnon():
     print('recieved')
     if request.method == 'POST':
-        print('led should turn on')
+        print('turn led on')
         GPIO.output(18, 1)
-    return 'penis'
+    return 'on'
 
 
 @app.route('/turnoff', methods=['GET', 'POST'])
 def turnoff():
     print('recieved')
     if request.method == 'POST':
-        print('led should turn on')
+        print('turn led off')
         GPIO.output(18, 0)
-    return 'balls'
+    return 'off'
 
 
-@app.route('/blink/')
+@app.route('/blink', methods=['GET', 'POST'])
 def blink():
-    return
+    print('recieved')
+    if request.method == "POST":
+        print('blink led')
+        for x in range(0, 10): # blink for 10 seconds
+            GPIO.output(18, 1)
+            time.sleep(.5)
+            GPIO.output(18, 0)
+            time.sleep(.5)
+            x += 1
+    return 'blink'
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=80)
