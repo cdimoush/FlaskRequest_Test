@@ -46,5 +46,17 @@ def blink():
             x += 1
     return 'blink'
 
+
+@app.route('/getmac', methods=['GET', 'POST'])
+def getmac():
+    print('looking for mac adress\n')
+    if request.method == 'POST':
+        try:
+            adress = open('/sys/class/net/' + 'wlan0' + '/address').read()
+        except:
+            adress = "00:00:00:00:00:00"
+        print(adress[0:17])
+        return adress[0:17]
+
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=80)
